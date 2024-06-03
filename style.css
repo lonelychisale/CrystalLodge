@@ -4,6 +4,8 @@ body, * {
     padding: 0;
     box-sizing: border-box;
     font-size: 17px;
+    font-family: sans-serif;
+    scroll-behavior: smooth;
 }
 .header {
     background-color: red;
@@ -119,6 +121,7 @@ body, * {
     text-align: center;
     color: white;
     text-transform: uppercase;
+    margin-top: 120px;
 }
 .descslider .content button {
     background-color: #a87e37;
@@ -129,13 +132,17 @@ body, * {
     cursor: pointer;
 }
 .descslider.first {
-    background-image: url("images/2.jpeg");
+    background-image: url("images/9.jpeg");
 }
 .descslider.second {
     background-image: url("images/3.jpeg");
 }
 .descslider.third {
-    background-image: url("images/4.jpeg");
+    background-image: url("images/11.jpeg");
+}
+
+.descslider.forth {
+    background-image: url("images/10.jpeg");
 }
 .bookform {
     display: flex;
@@ -175,6 +182,7 @@ body, * {
     color: white;
     border: none;
     cursor: pointer;
+    margin-top: 25px;
 }
 
 .accomodation{
@@ -192,6 +200,7 @@ body, * {
     }
     .accomodation .accomodationcontent .accommodationheader h1{
         color: #1f3368;
+        text-transform: capitalize;
     }
     .accomodation .accomodationcontent .accommodatiompricing{
         display: flex;
@@ -212,12 +221,11 @@ body, * {
         text-transform: capitalize;
     }
     .viewall button{
-        background-color: #a87e37;
-        color: white;
+        color: #a87e37;
         margin-top: 30px;
         padding: 10px;
         font-size: 15px;
-        border: none;
+        border: 1px solid #a87e37;
         padding-right: 30px;
         padding-left: 30px;
         text-transform: capitalize;
@@ -365,10 +373,87 @@ body, * {
             margin-left: 30px;
             display: flex;
         }
-        .footer .lowerfooter .lowerfootercontent ul li{
-            list-style-type: none;
-            margin-left: 20px;
-        }
+    .footer .lowerfooter .lowerfootercontent ul li{
+        list-style-type: none;
+        margin-left: 20px;
+    }
+    .booklink{
+        background-image: url("images/8.jpeg");
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 100px;
+        position: absolute;
+        margin-top: 100px;
+        display: flex;
+        justify-content: center;
+        width: 100vw;
+        height: 70vh;
+    }
+    .booklink .booklinkcontent{
+        width: 80%;
+        text-align: center;
+        color: white;
+        z-index: 200;
+        margin-top: -30px;
+    }
+    .booklink .booklinkcontent h1{
+        text-transform: capitalize;
+    }
+    .booklink .booklinkcontent button{
+        background-color: #a87e37;
+        padding: 10px;
+        padding-left: 40px;
+        padding-right: 40px;
+        border: none;
+        text-transform: uppercase;
+    }
+    .booklinkovery{
+     width: 100vw;
+     height: 70vh;
+     background-color: #1f3368;
+     position: relative;
+     margin-top: 100px;
+     opacity: 0.5;
+    }
+    .latestnews{
+        margin-top: 100px;
+        display: flex;
+        justify-content: center;
+    }
+    .latestnews .latesnewscontent{
+        width: 90%;
+    }
+    .latestnews .latesnewscontent h1{
+        text-transform: capitalize;
+        text-align: center;
+    }
+    .latestnews .latesnewscontent .latestnewsdivs{
+        display: flex;
+        margin-top: 30px;
+    }
+    .latestnews .latesnewscontent .latestnewsdivs .latest h1{
+        text-align: left;
+        font-size: 25px;
+    }
+    .latestnews .latesnewscontent .latestnewsdivs .latest{
+        width: 30%;
+        padding: 10px;
+        margin-left: 35px;
+    }
+    .latestnews .latesnewscontent .latestnewsdivs .latest:first-child{
+        margin-left: 0;
+    }
+    .latestnews .latesnewscontent .latestnewsdivs .latest button{
+        background-color: #a87e37;
+        color: white;
+        border: none;
+        padding: 5px;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-radius: 5px;
+    }
+
     
 
     @media screen and (max-width:870px){
@@ -431,7 +516,19 @@ body, * {
         margin-left: 0;
    
    
-    }}
+    }
+    @media screen and (max-width:740px) {
+        .latestnews .latesnewscontent .latestnewsdivs{
+            display: block;
+        }
+        .latestnews .latesnewscontent .latestnewsdivs .latest{
+            width: 100%;
+            margin-left: 0;
+            margin-top: 20px;
+        }
+    }
+    
+}
 @media screen and (max-width:600px) {
     .footer .upperfooter .upperfootercontent{
         width: 50%;
@@ -452,7 +549,26 @@ body, * {
             margin-left: 30px;
             display: flex;
         }
-       
-    
 }
+@media screen and (max-width:480px) {
+    .booklink{
+        min-height: 500px;
+        min-height: 700px;
+    } 
+    .booklinkovery{
+        min-height: 500px;
+        min-height: 700px;
+    } 
+}
+@media screen and (max-width:375px){
+    .booklink{
+        height: 800px;
+    }
+    .booklinkovery{
+        height: 800px;
+    }
+}
+
+
+
 
