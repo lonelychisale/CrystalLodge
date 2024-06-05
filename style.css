@@ -6,6 +6,7 @@ body, * {
     font-size: 17px;
     font-family: sans-serif;
     scroll-behavior: smooth;
+
 }
 .header {
     background-color: red;
@@ -323,6 +324,7 @@ body, * {
         margin-top: 150px;
         background-color: #1f3268ec;
         color: white;
+        width: 100vw;
     }
     .footer .upperfooter{
         display: flex;
@@ -335,8 +337,8 @@ body, * {
     }
     .footer .upperfooter .upperfootercontent div{
         width: 30%;
-        margin-left: 30px;
-        padding: 20px;
+        margin-left: 20px;
+        padding: 10px;
     }
     .footer .upperfooter .upperfootercontent div h1{
         color: #a87e37;
@@ -347,6 +349,46 @@ body, * {
     .footer .upperfooter .upperfootercontent div ul li{
         list-style-type: none;
         text-transform: capitalize;
+    }
+    .footer .upperfooter .upperfootercontent div:nth-child(2){
+        margin-left: 0;
+        width: 15%;
+    }
+    .footer .upperfooter .upperfootercontent div:nth-child(3){
+        margin-left: 0;
+        
+        width: 15%;
+    }
+    .footer .upperfooter .upperfootercontent div:nth-child(4){
+        width: 40%;
+        
+        padding: 0;
+    }
+    .footer .upperfooter .upperfootercontent div:nth-child(4) div{
+        padding: 0;
+        display: block;
+        margin-left: 0;
+        padding: 5px;
+        width: 100%;
+    }
+    .footer .upperfooter .upperfootercontent div:nth-child(4) div div{
+        width: 100%;
+        margin-left: 0;
+        
+        text-transform: capitalize;
+    }
+    .footer .upperfooter .upperfootercontent div:nth-child(4) div div input,textarea{
+        width: 100%;
+    }
+    .footer .upperfooter .upperfootercontent div:nth-child(4) div div input[type='submit']{
+        width: 30%;
+        background-color: #a87e37;
+        color: white;
+        padding: 10px;
+        padding-left: 5px;
+        padding-right: 15px;
+        text-transform: capitalize;
+        border: none;
     }
     .footer .upperfooter .upperfootercontent div li span{
         color: #a87e37;
