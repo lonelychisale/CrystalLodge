@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,6 +7,390 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
    <link rel="stylesheet" href="style.css">
+
+   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Add entrance animation for header
+        const header = document.querySelector(".header");
+        header.classList.add("header-entrance");
+
+        // Handle sticky header on scroll
+        let lastScrollTop = 0;
+        window.addEventListener("scroll", function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                // Downscroll - hide header
+                header.classList.add("header-hidden");
+            } else {
+                // Upscroll - show header
+                header.classList.remove("header-hidden");
+            }
+            lastScrollTop = scrollTop;
+        });
+
+        // Add animations for "About Us" and "Accommodation" sections on scroll
+        const aboutSection = document.querySelector(".about");
+        const accommodationSection = document.querySelector(".accommodation");
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("animate");
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        observer.observe(aboutSection);
+        observer.observe(accommodationSection);
+    });
+    </script>
+    <style>
+        body, * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 17px;
+    font-family: sans-serif;
+    scroll-behavior: smooth;
+}
+
+.header {
+    background-color: red;
+    width: 100vw;
+    position: fixed;
+    height: 130px;
+    z-index: 1000;
+}
+
+.header .upperheader {
+    display: flex;
+    background-color: white;
+    padding: 5px 30px;
+}
+
+.header .upperheader ul {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.header .upperheader ul li {
+    list-style-type: none;
+    margin-left: 20px;
+    color: #1f3368;
+}
+
+.header .upperheader ul:first-child span {
+    margin-left: 3px;
+    color: #a87e37;
+}
+
+.header .upperheader ul:nth-child(2) {
+    margin-left: auto;
+}
+
+
+.header .lowerheader {
+    display: flex;
+    align-items: center;
+    padding: 5px 30px;
+    background-color: #1f3368;
+}
+
+.header .lowerheader .leftlowerheader img {
+    width: 90px;
+}
+
+.header .lowerheader .rightlowerheader {
+    margin-left: auto;
+}
+
+.close {
+    display: none;
+}
+
+.header .lowerheader .rightlowerheader ul {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.header .lowerheader .rightlowerheader ul li {
+    list-style-type: none;
+    margin-left: 30px;
+}
+
+.header .lowerheader .rightlowerheader ul li a {
+    color: white;
+    font-size: 16px;
+    font-family: sans-serif;
+    text-decoration: none;
+}
+
+.header .lowerheader .rightlowerheader ul li a:hover,
+.header .lowerheader .rightlowerheader ul li:first-child a {
+    color: #a87e37;
+}
+
+.header .lowerheader .rightlowerheader ul li:last-child {
+    background-color: #a87e37;
+    color: white;
+    padding: 10px 30px;
+    margin-left: 30px;
+}
+
+.header .lowerheader .rightlowerheader ul li:last-child:hover {
+    background-color: white;
+    color: #a87e37;
+}
+
+.header .lowerheader .rightlowerheader ul li:last-child a:hover {
+    color: #a87e37;
+}
+
+/* Entrance animation for header */
+.header-entrance {
+    animation: slideDown 1s ease-out;
+}
+
+/* Keyframes for entrance animation */
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Transition for hiding/showing header on scroll */
+.header-hidden {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-out;
+}
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 95vh;
+}
+
+.descslider {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.descslider.active {
+    opacity: 1;
+}
+
+.descslider .content {
+    width: 60%;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    margin-top: 120px;
+}
+
+.descslider .content button {
+    background-color: #a87e37;
+    border: none;
+    padding: 10px 30px;
+    text-transform: uppercase;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.descslider.first {
+    background-image: url("images/9.jpeg");
+}
+
+.descslider.second {
+    background-image: url("images/WhatsApp\ Image\ 2024-05-31\ at\ 7.31.30\ PM\(2\).jpeg");
+}
+
+.descslider.third {
+    background-image: url("images/360_F_80911186_RoBCsyLrNTrG7Y1EOyCsaCJO5DyHgTox.jpg");
+}
+
+.descslider.forth {
+    background-image: url("images/10.jpeg");
+}
+
+.bookform {
+    display: flex;
+    justify-content: center;
+    padding: 50px 0;
+    background-color: #f5f5f5;
+}
+
+.bookform form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 60%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.bookform .formgroup {
+    flex: 1;
+    min-width: 150px;
+    margin: 10px;
+}
+
+.bookform .formgroup label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.bookform .formgroup input,
+.bookform .formgroup select {
+    width: 100%;
+
+
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.bookform button {
+    background-color: #a87e37;
+    border: none;
+    padding: 10px 30px;
+    color: white;
+    text-transform: uppercase;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+
+     .title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .title button {
+            background: none;
+            border: none;
+            color: #1f3368;
+            cursor: pointer;
+        }
+        
+        .title button:hover i {
+            color: #a87e37;
+        }
+        
+        .accommodatiompricing {
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .accommodatiompricing.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .category {
+            text-align: left;
+            text-transform: capitalize;
+            background-color: whitesmoke;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .category img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .category div {
+            background-color: #1f3268b7;
+            color: white;
+            width: 100%;
+            padding: 10px;
+            margin-left: 0;
+        }
+
+        .category ul {
+            padding: 10px;
+        }
+
+        .category h4 {
+            background-color: #a87e37;
+            padding: 5px;
+        }
+
+        @keyframes rotateVisibility {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        .accommodatiompricing.one {
+            animation: rotateVisibility 10s infinite;
+        }
+
+        .accommodatiompricing.two {
+            animation: rotateVisibility 10s infinite;
+            animation-delay: 5s;
+        }
+       
+        .aboutheader {
+            margin-bottom: 20px;
+        }
+
+        
+        .latestpostcontent {
+            text-align: center;
+        }
+
+        .postheader h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .postheader p {
+            margin-bottom: 20px;
+        }
+
+       
+        .viewall button {
+            background-color: #a87e37;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.01s ease;
+        }
+
+        .viewall button:hover {
+            background-color: #1f3368;
+        }
+
+    </style>
 </head>
 <body>
     <div class="hotel">
@@ -55,15 +439,25 @@
                 <div class="content">
                     <h1>Welcome to Crystals Hotel</h1>
                     <h2>Discover Luxury</h2>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi vero ut, cupiditate fuga tempora doloremque non nihil quia ipsum, obcaecati distinctio harum quos, asperiores sed corporis architecto perspiciatis iste! Vel!</p>
+                    <p> we create a
+                        welcoming and rejuvenating
+                        environment for our guests,
+                        offering exceptional service,
+                        comfortable accommodations,
+                        and a range of amenities</p>
                     <button>contact us</button>
                 </div>
             </div>
             <div class="descslider second">
+                
                 <div class="content">
                     <h1>Experience Comfort</h1>
                     <h2>Relax and Unwind</h2>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi vero ut, cupiditate fuga tempora doloremque non nihil quia ipsum, obcaecati distinctio harum quos, asperiores sed corporis architecto perspiciatis iste! Vel!</p>
+                    <p> the safety and security
+                        of our guests are paramount. Our
+                        commitment to your safety is reflected in
+                        the comprehensive security measures we
+                        have implemented</p>
                     <button>Book Now</button>
                 </div>
             </div>
@@ -71,7 +465,7 @@
                 <div class="content">
                     <h1>Unmatched Hospitality</h1>
                     <h2>Feel at Home</h2>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi vero ut, cupiditate fuga tempora doloremque non nihil quia ipsum, obcaecati distinctio harum quos, asperiores sed corporis architecto perspiciatis iste! Vel!</p>
+                    <p>We understand that every event is unique, and we are committed to making your conference a memorable success.</p>
                     <button>reserve conference room</button>
                 </div>
             </div>
@@ -80,13 +474,16 @@
                 <div class="content">
                     <h1>Best Meals for your test</h1>
                     <h2>Enjoy delicious meals</h2>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi vero ut, cupiditate fuga tempora doloremque non nihil quia ipsum, obcaecati distinctio harum quos, asperiores sed corporis architecto perspiciatis iste! Vel!</p>
+                    <p>Indulge in a culinary journey at our
+                        on-site restaurant, serving a diverse
+                        menu of local and international
+                        cuisine</p>
                     <button>order your meal</button>
                 </div>
             </div>
         </div>
 
-        <div class="bookform" id="book">
+        <div class="bookform" >
             <form action="">
                 <div class="formgroup">
                     <label for="location">Location</label>
@@ -121,29 +518,152 @@
         <div class="accomodation">
             <div class="accomodationcontent">
                 <div class="accommodationheader">
-                    <h1>our accomodation</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem eum necessitatibus aut iure. Consequuntur, magni sapiente. Exercitationem, deleniti eligendi laboriosam aut dicta optio incidunt sunt fugiat, amet accusamus ducimus suscipit.</p>
+                    <div class="title" style="display: flex;">
+                        <h1>our Rooms</h1>
+                        <div style="position: absolute;right: 0;margin-right: 60px;margin-top: 20px;">
+                            <button><i style="color: #1f3368;" class="glyphicon glyphicon-arrow-left" id="firstroomdisplay"></i></button>
+                            <button style="margin-left: 20px;"><i id="secondroomdisplay" style="color: #1f3368;" class="glyphicon glyphicon-arrow-right"></i></button>
+                        </div>
+                    </div>
+                    
+                    <p>Our lodge features a collection of well-appointed rooms and suites
+                        designed to provide a perfect blend of modern amenities and luxurious
+                        sophistication. Each room is tastefully decorated, offering a cozy and
+                        relaxing atmosphere for our guests.</p>
                 </div>
-                <div class="accommodatiompricing">
-                    <div class="category one">
+                <div class="accommodatiompricing one active" style="position: absolute;">
+                    <div class="category one" style="text-align: left;text-transform: capitalize;background-color: whitesmoke;padding: 10px;">
                         <img src="images/2.jpeg" alt="sstandard">
-                        <i>standard singles : mk50000 / doubles :mk70000</i>
+                        <div style="background-color: #1f3268b7;color: white;width: 100%;margin-left: 0;padding: 10px;">
+                            <ul style="padding: 10px;">
+                                <li> Queen size bed</li>
+                                <li>Jacuzzi</li>
+                                <li>Unique tv stand with a
+                                    fridge inside</li>
+                                <li>Very big (comfortable)and
+                                    beautiful</li> 
+                                <li>Air conditioner</li> 
+                                <li> Hair dryer</li> 
+                                <li>It has a lounge</li>
+                            </ul>
+                            <h4 style="background-color: #a87e37;padding: 5px;">executive - mw900000 <span style="color: #1f3268b7;">. 1 guest</span></h4>
+                           
+                            <h3>single room</h3>
+
+                        </div>
+                        
                         
                     </div>
-                    <div class="category two">
+                    <div class="category two" style="text-align: left;text-transform: capitalize;background-color: whitesmoke;padding: 20px;">
                         <img src="images/3.jpeg" alt="executive">
-                        <i>executive singles : mk700000 / double room :mk9000</i>
+                        <div style="background-color: #1f3268b7;color: white;width: 100%;margin-left: 0;padding: 10px;">
+                            <ul style="padding: 10px;">
+                                <li> Bathtub</li>
+                                <li>Queen size bed</li>
+                                <li>Air conditioner</li>
+                               
+                                <li>Unique tv stand with a
+                                    fridge inside</li> 
+                                <li> Hair dryer</li> 
+                                <li>It has a lounge</li>
+                            </ul>
+                            <h4  style="background-color: #a87e37;padding: 5px;">premium - mw600000 <span style="color: #1f3268b7;">. 1 guest</span></h4>
+                            <h3>single room</h3>
+
+                        </div>
+                        
                         
                     </div>
-                    <div class="category three">
+                    <div class="category three" style="text-align: left;text-transform: capitalize;background-color: whitesmoke;padding: 20px;">
                         <img src="images/4.jpeg" alt="premium">
-                        <i>premium singles : 60000 / doubles : 800000</i>
+                        <div style="background-color: #1f3268b7;color: white;width: 100%;margin-left: 0;padding: 10px;">
+                            <ul style="padding: 10px;">
+                                <li> Queen size bed</li>
+                                <li>Dstv</li>
+                                <li>Smart tv</li>
+                                <li>Wifi</li> 
+                                <li>Min fridge</li> 
+                                <li> Hair dryer</li> 
+                                
+                            </ul>
+                            <h4 style="background-color: #a87e37;padding: 5px;">standard - mw500000 <span style="color: #1f3268b7;">. 1 guest</span></h4>
+                            
+                            <h3>single room</h3>
+
+                        </div>
+                     
                         
                     </div>
                 </div>
-                <div class="viewall">
-                    <button>view all rooms</button>
+                <div class="accommodatiompricing two" >
+                    <div class="category one" style="text-align: left;text-transform: capitalize;background-color: whitesmoke;padding: 10px;">
+                        <img src="images/2.jpeg" alt="sstandard">
+                        <div style="background-color: #1f3268b7;color: white;width: 100%;margin-left: 0;padding: 10px;">
+                            <ul style="padding: 10px;">
+                                <li> Queen size bed</li>
+                                <li>Jacuzzi</li>
+                                <li>Unique tv stand with a
+                                    fridge inside</li>
+                                <li>Very big (comfortable)and
+                                    beautiful</li> 
+                                <li>Air conditioner</li> 
+                                <li> Hair dryer</li> 
+                                <li>It has a lounge</li>
+                            </ul>
+                            
+                           
+                            <h4 style="background-color: #a87e37;padding: 5px;">executive - mw900000 <span style="color: #1f3268b7;">. 2 guest</span></h4>
+                            <h3>double room</h3>
+
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="category two" style="text-align: left;text-transform: capitalize;background-color: whitesmoke;padding: 20px;">
+                        <img src="images/3.jpeg" alt="executive">
+                        <div style="background-color: #1f3268b7;color: white;width: 100%;margin-left: 0;padding: 10px;">
+                            <ul style="padding: 10px;">
+                                <li> Bathtub</li>
+                                <li>Queen size bed</li>
+                                <li>Air conditioner</li>
+                               
+                                <li>Unique tv stand with a
+                                    fridge inside</li> 
+                                <li> Hair dryer</li> 
+                                <li>It has a lounge</li>
+                            </ul>
+                           
+                            <h4 style="background-color: #a87e37;padding: 5px;">premium - mw800000 <span style="color: #1f3268b7;">. 2 guest</span></h4>
+                        <h3>double room</h3>
+
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="category three" style="text-align: left;text-transform: capitalize;background-color: whitesmoke;padding: 20px;">
+                        <img src="images/4.jpeg" alt="premium">
+                        <div style="background-color: #1f3268b7;color: white;width: 100%;margin-left: 0;padding: 10px;">
+                            <ul style="padding: 10px;">
+                                <li> Queen size bed</li>
+                                <li>Dstv</li>
+                                <li>Smart tv</li>
+                                <li>Wifi</li> 
+                                <li>Min fridge</li> 
+                                <li> Hair dryer</li> 
+                                
+                            </ul>
+                            
+                            
+                            <h4 style="background-color: #a87e37;padding: 5px;">standard - mw700000 <span style="color: #1f3268b7;">. 2 guest</span></h4>
+                            <h3>double room</h3>
+
+                        </div>
+                     
+                        
+                    </div>
+                   
                 </div>
+                
             </div>
         </div>
         
@@ -151,39 +671,33 @@
             <div class="servicescontent">
                 <div class="sewrvicesheaer" style="text-align: center;color: white;">
                     <h1 style="color: #a87e37;text-transform: capitalize;">our offers</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta reprehenderit eaque aliquam! Cum numquam repellendus laudantium beatae odio, modi eum dolor distinctio, non magni in, aut suscipit quasi! Minima, quis!</p>
+                <p> we are committed to providing high-quality services. Our
+                    team comprises dedicated professionals focused on delivering exceptional
+                    results and ensuring customer satisfaction</p>
                 </div>
                 
                 <div class="rowone">
                     <div class="service one">
                         <h1>restaurant</h1>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid in magni perspiciatis nulla dignissimos consequatur nihil vero minima. Dicta iusto nulla, soluta corrupti reprehenderit iste beatae rerum officia accusantium vel.</p>
+                        <p>Indulge in a culinary journey at our
+                            on-site restaurant, serving a diverse
+                            menu of local and international
+                            cuisine. Our restaurant offers a
+                            selection of refreshing beverages in a
+                            warm and inviting setting</p>
                     </div>
                     <div class="service two">
                         <h1>accomodation</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque placeat sed accusamus minus dicta quis excepturi aperiam assumenda laborum, error temporibus sequi iusto nisi, dolorum sapiente voluptate ut voluptates. Sunt.</p>
+                        <p>Our lodge features a collection of well-appointed rooms and suites
+                            designed to provide a perfect blend of modern amenities and luxurious
+                            sophistication. Each room is tastefully decorated, offering a cozy and
+                            relaxing atmosphere for our guests</p>
                     </div>
                     <div class="service three">
                         <h1>conference</h1>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime atque, quae, consectetur rem totam debitis at exercitationem odit pariatur quos modi facere tempore amet reprehenderit laborum fugit perspiciatis iusto ut.</p>
+                        <p>Crystals Lodge is equipped with state-of-the-art conference facilities, making it an ideal venue
+                            for corporate meetings, conferences, and special events.</p>
                     </div>
-
-                </div>
-
-                <div class="rowtwo">
-                    <div class="service four">
-                        <h1>jfklg</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, voluptate libero cum iure, numquam repellendus explicabo reprehenderit accusamus excepturi dolores odit minus distinctio ipsam sapiente eos impedit dolor nostrum eum.</p>
-                    </div>
-                    <div class="service four">
-                        <h1>jfklg</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, voluptate libero cum iure, numquam repellendus explicabo reprehenderit accusamus excepturi dolores odit minus distinctio ipsam sapiente eos impedit dolor nostrum eum.</p>
-                    </div>
-                    <div class="service four">
-                        <h1>jfklg</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, voluptate libero cum iure, numquam repellendus explicabo reprehenderit accusamus excepturi dolores odit minus distinctio ipsam sapiente eos impedit dolor nostrum eum.</p>
-                    </div>
-                    
 
                 </div>
                     
@@ -192,19 +706,24 @@
             </div>
         </div>
 
-        <div class="about" id="about">
+        <div class="about " id="about" style="margin-top: 100px;">
             <div class="aboutcontent">
                 <div class="aboutheader">
                     <h1>about us</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto sunt consequuntur vitae, culpa et rem quas quibusdam sed ullam, fugit eaque veritatis magnam. Consequuntur consectetur, doloribus atque possimus praesentium ad.</p>
-                    
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto sunt consequuntur vitae, culpa et rem quas quibusdam sed ullam, fugit eaque veritatis magnam. Consequuntur consectetur, doloribus atque possimus praesentium ad.</p>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto sunt consequuntur vitae, culpa et rem quas quibusdam sed ullam, fugit eaque veritatis magnam. Consequuntur consectetur, doloribus atque possimus praesentium ad.</p>
-                    <button>read more</button>
+                    <p>Crystals Lodge is a new establishment located in Kalimbuka area, Zomba,
+                        Malawi, behind the mental hospital. Surrounded by the natural beauty of the
+                        region, Crystals Lodge offers a unique and tranquil retreat for both leisure and
+                        business travelers.</p>
+                    <p>Our lodge offers a range of services including accommodation, dining facilities,
+                        and conference amenities. Our rooms are equipped with modern conveniences
+                        such as a mini-fridge, air conditioners, jacuzzi, Smart TV, DSTV, Wi-Fi, and more.</p>
+                    <p>At Crystals Lodge, we are committed to providing high-quality services. Our
+                        team comprises dedicated professionals focused on delivering exceptional
+                        results and ensuring customer satisfaction.</p>
+                    <button><a href="Pages/about.html" style="color: white; text-decoration: none;">read more</a></button>
                 </div>
                 <div class="img">
-                    <img src="images/2.jpeg" alt="aboutimage">
+                    <img src="images/12.jpeg" alt="aboutimage" id="aboutImage">
                 </div>
             </div>
         </div>
@@ -215,50 +734,56 @@
                     <h1>our gallary</h1>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae laborum doloremque suscipit aliquid magni illum delectus, sint incidunt pariatur temporibus eligendi odit nobis quod autem corporis velit harum consequuntur nam?</p>
                 </div>
-                <div class="posts">
+                <div class="posts" id="posts">
                     <div class="post one">
                         <img src="images/2.jpeg" alt="">
                         <img src="images/1.jpeg" alt="">
                         <img src="images/4.jpeg" alt="">
                     </div>
-                <div class="post two">
-                    <img src="images/2.jpeg" alt="">
-                    <img src="images/3.jpeg" alt="">
-                    <img src="images/4.jpeg" alt="">
+                    <div class="post two">
+                        <img src="images/7.jpeg" alt="">
+                        <img src="images/8.jpeg" alt="">
+                        <img src="images/9.jpeg" alt="">
+                    </div>
+                    <div class="post three">
+                        <img src="images/10.jpeg" alt="">
+                        <img src="images/11.jpeg" alt="">
+                        <img src="images/12.jpeg" alt="">
+                    </div>
                 </div>
-                <div class="post thee">
-                    <img src="images/1.jpeg" alt="">
-                    <img src="images/2.jpeg" alt="">
-                    <img src="images/3.jpeg" alt="">
-                </div>
-                </div>
-
                 <div class="viewall" style="text-align: center;">
-                    <button>view all posts</button>
+                    <button><a href="Pages/gallary.html" style="color: white;text-decoration: none;">view more</a></button>
                 </div>
                 
             </div>
         </div>
 
-        <div class="booklink">
+
+        
+        <div class="booklink" id="book">
+          
            <div class="booklinkcontent">
             <div>
                 <h1>enjoy your stay with us</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate non magni reiciendis, tempore voluptas recusandae, quidem ullam officia suscipit eligendi dolore! Illum autem reiciendis rem iste quia mollitia doloribus quaerat.</p>
-                <button>book now</button>
+                <p>At Crystals Lodge, the safety and security
+                    of our guests are paramount. Our
+                    commitment to your safety is reflected in
+                    the comprehensive security measures we
+                    have implemented</p>
+                <button><a href="Pages/book.html" style="color: white;text-decoration: none;">book now</a></button>
             </div>
            </div>
         </div>
 
         <div class="booklinkovery"></div>
 
-        <div class="latestnews">
+        <div class="latestnews" style="display: none;">
             <div class="latesnewscontent">
                 <h1>recent news</h1>
                 <div class="latestnewsdivs">
                     <div class="latest first">
                         <button>3 june 2024</button>
-                        <h1>How to book your room</h1>
+                        <h1>Hotel Safety Tips You Should Not Ignore</h1>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti aspernatur ipsum delectus, facere totam tempore rem officia maiores, aut minus quae corporis obcaecati accusamus nihil quos qui accusantium odit vero!</p>
                         <i>read more <i class="glyphicon glyphicon-arrow-right"></i></i>
                     </div>
@@ -303,14 +828,14 @@
                 <div class="footerlinks">
                     <h1>quick links</h1>
                     <ul>
-                        <li><a href="about">About</a></li>
-                        <li><a href="services">Services</a></li>
-                        <li><a href="gallary">Gallery</a></li>
-                        <li><a href="contact">Contact</a></li>
-                        <li><a href="contact">posts</a></li>
-                        <li><a href="">confence</a></li>
-                        <li><a href="">restaurant</a></li>
-                        <li><a href="">news</a></li>
+                        <li><a href="Pages/about.html">About</a></li>
+                        <li><a href="Pages/services.html">Services</a></li>
+                        <li><a href="Pages/gallary.html">Gallery</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="Pages/posts.html">posts</a></li>
+                        <li><a href="Pages/conference.html">confence</a></li>
+                        <li><a href="Pages/restaurant.html">restaurant</a></li>
+                        
                     </ul>
                 </div>
 
@@ -343,7 +868,7 @@
 
             <div class="lowerfooter">
                 <div class="lowerfootercontent">
-                    <ul><li>© 2024 Resort. All rights reserved </li></ul>
+                    <ul><li>© 2024 Londesigns. All rights reserved </li></ul>
                     <div> 
                             <ul>
                                 <li><i class="bi bi-whatsapp"></i></li>
@@ -427,6 +952,64 @@
             });
         
 
+
+//rooms animation
+const firstButton = document.getElementById("firstroomdisplay");
+            const secondButton = document.getElementById("secondroomdisplay");
+            const pricingOne = document.querySelector(".accommodatiompricing.one");
+            const pricingTwo = document.querySelector(".accommodatiompricing.two");
+
+            firstButton.addEventListener("click", function() {
+                pricingOne.classList.add("active");
+                pricingTwo.classList.remove("active");
+            });
+
+            secondButton.addEventListener("click", function() {
+                pricingOne.classList.remove("active");
+                pricingTwo.classList.add("active");
+            });
+
+
+            //gallary
+            const gallary = [
+                "images/1.jpeg",
+                "images/2.jpeg",
+                "images/3.jpeg",
+                "images/4.jpeg",
+                "images/7.jpeg",
+                "images/8.jpeg",
+                "images/9.jpeg",
+                "images/10.jpeg",
+                "images/11.jpeg",
+            ];
+
+            const posts = document.querySelectorAll('.posts .post img');
+
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+function changeImages() {
+    let shuffledImages = [...gallary];
+    shuffle(shuffledImages);
+    
+    // Ensure we have enough images to fill all slots without repetition
+    const totalImagesNeeded = posts.length;
+    while (shuffledImages.length < totalImagesNeeded) {
+        shuffledImages = shuffledImages.concat([...gallary]);
+    }
+
+    posts.forEach((post, index) => {
+        post.src = shuffledImages[index];
+    });
+}
+
+changeImages();
+setInterval(changeImages, 5000); // Change images every 5 seconds
+       
     </script>
 </body>
 </html>

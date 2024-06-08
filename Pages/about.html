@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crystal Lodge - About Us</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+   <link rel="stylesheet" href="../style.css">
+   <link rel="stylesheet" href="../style.css">
+
+   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Add entrance animation for header
+        const header = document.querySelector(".header");
+        header.classList.add("header-entrance");
+
+        // Handle sticky header on scroll
+        let lastScrollTop = 0;
+        window.addEventListener("scroll", function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                // Downscroll - hide header
+                header.classList.add("header-hidden");
+            } else {
+                // Upscroll - show header
+                header.classList.remove("header-hidden");
+            }
+            lastScrollTop = scrollTop;
+        });
+
+        // Add animations for "About Us" and "Accommodation" sections on scroll
+        const aboutSection = document.querySelector(".about");
+        const accommodationSection = document.querySelector(".accommodation");
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("animate");
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        observer.observe(aboutSection);
+        observer.observe(accommodationSection);
+    });
+    </script>
+    <style>
+        body, * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 17px;
+    font-family: sans-serif;
+    scroll-behavior: smooth;
+}
+
+.header {
+    background-color: red;
+    width: 100vw;
+    position: fixed;
+    height: 130px;
+    z-index: 1000;
+}
+
+.header .upperheader {
+    display: flex;
+    background-color: white;
+    padding: 5px 30px;
+}
+
+.header .upperheader ul {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.header .upperheader ul li {
+    list-style-type: none;
+    margin-left: 20px;
+    color: #1f3368;
+}
+
+.header .upperheader ul:first-child span {
+    margin-left: 3px;
+    color: #a87e37;
+}
+
+.header .upperheader ul:nth-child(2) {
+    margin-left: auto;
+}
+
+.navbar {
+    position: absolute;
+    right: 0;
+    margin-right: 30px;
+    display: none;
+}
+
+.navbar span div {
+    background: #a87e37;
+    width: 50px;
+    height: 5px;
+    margin-top: 10px;
+}
+
+.header .lowerheader {
+    display: flex;
+    align-items: center;
+    padding: 5px 30px;
+    background-color: #1f3368;
+}
+
+.header .lowerheader .leftlowerheader img {
+    width: 90px;
+}
+
+.header .lowerheader .rightlowerheader {
+    margin-left: auto;
+}
+.header .lowerheader .rightlowerheader ul li:first-child a {
+    color: white
+}\.header .lowerheader .rightlowerheader ul li:nth-child(2) a {
+    color: #a87e37;
+}
+
+.close {
+    display: none;
+}
+
+.header .lowerheader .rightlowerheader ul {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.header .lowerheader .rightlowerheader ul li {
+    list-style-type: none;
+    margin-left: 30px;
+}
+
+.header .lowerheader .rightlowerheader ul li a {
+    color: white;
+    font-size: 16px;
+    font-family: sans-serif;
+    text-decoration: none;
+}
+
+.header .lowerheader .rightlowerheader ul li a:hover,
+.header .lowerheader .rightlowerheader ul li:first-child a {
+    color: #a87e37;
+}
+
+.header .lowerheader .rightlowerheader ul li:last-child {
+    background-color: #a87e37;
+    color: white;
+    padding: 10px 30px;
+    margin-left: 30px;
+}
+
+.header .lowerheader .rightlowerheader ul li:last-child:hover {
+    background-color: white;
+    color: #a87e37;
+}
+
+.header .lowerheader .rightlowerheader ul li:last-child a:hover {
+    color: #a87e37;
+}
+
+/* Entrance animation for header */
+.header-entrance {
+    animation: slideDown 1s ease-out;
+}
+
+/* Keyframes for entrance animation */
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Transition for hiding/showing header on scroll */
+.header-hidden {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-out;
+}
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 95vh;
+}
+
+.descslider {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.descslider.active {
+    opacity: 1;
+}
+
+.descslider .content {
+    width: 60%;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    margin-top: 120px;
+}
+
+.descslider .content button {
+    background-color: #a87e37;
+    border: none;
+    padding: 10px 30px;
+    text-transform: uppercase;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.descslider.first {
+    background-image: url("images/9.jpeg");
+}
+
+.descslider.second {
+    background-image: url("images/3.jpeg");
+}
+
+.descslider.third {
+    background-image: url("images/11.jpeg");
+}
+
+.descslider.forth {
+    background-image: url("images/10.jpeg");
+}
+
+.bookform {
+    display: flex;
+    justify-content: center;
+    padding: 50px 0;
+    background-color: #f5f5f5;
+}
+
+.bookform form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 60%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.bookform .formgroup {
+    flex: 1;
+    min-width: 150px;
+    margin: 10px;
+}
+
+.bookform .formgroup label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.bookform .formgroup input,
+.bookform .formgroup select {
+    width: 100%;
+
+
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.bookform button {
+    background-color: #a87e37;
+    border: none;
+    padding: 10px 30px;
+    color: white;
+    text-transform: uppercase;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+.about{
+    margin-top: 70px;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="hotel">
+        <div class="header">
+            <div class="upperheader">
+                <ul>
+                    <li><span class="glyphicon glyphicon-map-marker"></span> Kalimbuka Area Behind Mental Hospital, Zomba</li>
+                    <li><span class="glyphicon glyphicon-earphone"></span> +265 985 551 348 </li>
+                    <li><span class="glyphicon glyphicon-envelope"></span> info@crystalsloge.com</li>
+                </ul>
+                <ul>
+                    <li><i class="bi bi-whatsapp"></i></li>
+                    <li><i class="bi bi-facebook"></i></li>
+                    <li><i class="bi bi-twitter"></i></li>
+                    <li><i class="bi bi-instagram"></i></li>
+                </ul>
+            </div>
+            <div class="lowerheader">
+                <div class="leftlowerheader">
+                    <img src="../images/logo.jpeg" alt="logo">
+                </div>
+                <div class="rightlowerheader">
+                    <div class="close">x</div>
+                    <ul>
+                        <li><a href="../index.html" style="color: white;">Home</a></li>
+                        <li><a href="#" style="color: #a87e37;">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="gallary.html">Gallery</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="book.html">Book Now</a> <span class="glyphicon glyphicon-arrow-right"></span></li>
+                    </ul>
+                </div>
+                <div class="navbar">
+                    <span>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="slider-container" style="background-image:url('../images/4.jpeg');height: 80vh;">
+            <div class="descslider first active">
+                <div class="content">
+                    <h1>Home - About Us</h1>
+                    
+                </div>
+            </div>
+                
+           
+        </div>
+
+        <div class="about " id="about">
+            <div class="aboutcontent">
+                <div class="aboutheader">
+                    <h1>Overview</h1>
+                    <p>Crystals Lodge is a new establishment located in Kalimbuka area, Zomba,
+                        Malawi, behind the mental hospital. Surrounded by the natural beauty of the
+                        region, Crystals Lodge offers a unique and tranquil retreat for both leisure and
+                        business travelers.</p>
+                    <p>Our lodge offers a range of services including accommodation, dining facilities,
+                        and conference amenities. Our rooms are equipped with modern conveniences
+                        such as a mini-fridge, air conditioners, jacuzzi, Smart TV, DSTV, Wi-Fi, and more.</p>
+                    <p>At Crystals Lodge, we are committed to providing high-quality services. Our
+                        team comprises dedicated professionals focused on delivering exceptional
+                        results and ensuring customer satisfaction.</p>
+                    <p>At Crystals Lodge, the safety and security
+                        of our guests are paramount. Our
+                        commitment to your safety is reflected in
+                        the comprehensive security measures we
+                        have implemented:Brick Fenced Perimeter,Electric Wire Fencing
+                        ,24-Hour Guard Services
+                        ,State-of-the-Art Alarm Systems
+                        , Emergency Response</p>
+                    
+                </div>
+                <div class="img">
+                    <img src="../images/8.jpeg" alt="aboutimage">
+                </div>
+            </div>
+        </div>
+<style>
+    .mission{
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+        background-color: whitesmoke;
+    }
+    .mission div{
+        width: 80vw;
+        text-align: center;
+        
+    }
+    
+    .mission div button{
+        text-transform: capitalize;
+        background-color: #a87e37;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 20px;
+        margin-top: 20px;
+    }
+    .mission div button:nth-child(2){
+        margin-top: 30px;
+    }
+</style>
+        <div class="mission">
+            <div>
+                <button>mission statement</button>
+                <p class="missionstatement">Our mission is to create a
+                    welcoming and rejuvenating
+                    environment for our guests,
+                    offering exceptional service,
+                    comfortable accommodations,
+                    and a range of amenities that
+                    showcase the beauty of Zomba
+                    and its surroundings.</p>
+
+                    <button>vision statement</button>
+                <p class="visionstatement">
+                    To be the preferred destination
+that seamlessly blends
+modern comfort with the
+enchanting allure of Zomba's
+natural landscape, providing
+guests with an unforgettable
+experience
+
+                    </p>
+            </div>
+        </div>
+
+       
+
+       
+
+       
+
+        <div class="footer" id="contact">
+            <div class="upperfooter">
+               <div class="upperfootercontent">
+                <div class="footercontact">
+                    <h1>contact info</h1>
+                    <ul>
+                        
+                        <li><span class="glyphicon glyphicon-map-marker"></span> Kalimbuka Area Behind Mental Hospital, Zomba</li>
+                        <li><span class="glyphicon glyphicon-earphone"></span> +265 985 551 348 </li>
+                        <li><span class="glyphicon glyphicon-envelope"></span> info@crystalsloge.com</li>
+                    </ul>
+                </div>
+                <div class="footerservices">
+                    <h1>our services</h1>
+                    <ul>
+                        <li>accomodation</li>
+                        <li>restaurant</li>
+                        <li>conferences</li>
+                    </ul>
+                </div>
+                <div class="footerlinks">
+                    <h1>quick links</h1>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="gallary.html">Gallery</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        
+                    </ul>
+                </div>
+
+                <div class="contactform">
+                    <div class="contactformcontent">
+                        <form action="">
+                            <div>
+                                <div class="formgroup">
+                                    <label for="">email adress</label>
+                                    <input type="email" name="email" id="">
+                                </div>
+                                <div class="formgrou">
+                                    <label for="">subject</label>
+                                    <input type="text" name="" id="">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="formgrou">
+                                    <textarea name="" id=""></textarea>
+                                </div>
+                                <div class="formgrou">
+                                    <input type="submit" value="send message">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+               </div>
+            </div>
+
+            <div class="lowerfooter">
+                <div class="lowerfootercontent">
+                    <ul><li>© 2024 Resort. All rights reserved </li></ul>
+                    <div> 
+                            <ul>
+                                <li><i class="bi bi-whatsapp"></i></li>
+                                <li><i class="bi bi-facebook"></i></li>
+                                <li><i class="bi bi-twitter"></i></li>
+                                <li><i class="bi bi-instagram"></i></li>
+                            </ul>
+                        
+                    </div>
+                    <ul><li>privacy reserved</li></ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        const sliders = document.querySelectorAll('.descslider');
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            sliders.forEach((slider, i) => {
+                slider.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % sliders.length;
+            showSlide(currentIndex);
+        }
+
+        setInterval(nextSlide, 5000); // Switch slide every 5 seconds
+
+        
+        //navbar
+        $(".navbar").click(function() {
+                $(".navbar").hide();
+                $(".rightlowerheader").show().css({
+                    "background-color": "#1f3368",
+                    "position": "absolute",
+                    "top": "0",
+                    "width":"100vw",
+                    "margin-right": "0"
+                });
+                $(".rightlowerheader ul").css({
+                    "display": "block",
+                    "padding": "0",
+                    "width": "100vw",
+                    "height": "100vh",
+                    "margin-left":"0"
+                });
+                $(".rightlowerheader ul li").css({
+                    "padding": "5px",
+                    "margin-left": "10px"
+                });
+                $(".rightlowerheader ul li a").css({
+                    "color": "white"
+                });
+                $(".close").css({
+                    "right": "0",
+                    "position": "absolute",
+                    "padding": "5px",
+                    "font-size": "30px",
+                    "display":"block",
+                    "margin-right":"50px",
+                    "color":"white"
+                });
+            });
+
+            $(".close").click(function() {
+                $(".rightlowerheader").hide("slow");
+                $(".navbar").show("slow");
+                $(".close").css({
+                    "right": "0",
+                    "position": "absolute",
+                    "padding": "5px",
+                    "margin-right": "50px",
+                    "font-size": "30px",
+                    "color":"white"
+                });
+            });
+        
+
+    </script>
+</body>
+</html>

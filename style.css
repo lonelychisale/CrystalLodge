@@ -139,7 +139,7 @@ body, * {
     background-image: url("images/3.jpeg");
 }
 .descslider.third {
-    background-image: url("images/11.jpeg");
+    background-image: url("images/3d-render-office-workspace-modern-meeting-room-mockup-free-photo.jpg");
 }
 
 .descslider.forth {
@@ -194,10 +194,10 @@ body, * {
     }
     .accomodation .accomodationcontent{
         width: 90%;
-        text-align: center;
+        
     }
     .accomodation .accomodationcontent .accommodationheader{
-        text-align: center;
+        
     }
     .accomodation .accomodationcontent .accommodationheader h1{
         color: #1f3368;
@@ -211,6 +211,9 @@ body, * {
         margin-left: 20px;
         margin-top: 20px;
 
+    }
+    .accomodation .accomodationcontent .accommodatiompricing div:first{
+        margin-left: 0;
     }
     .accomodation .accomodationcontent .accommodatiompricing div img{
         width: 100%;
@@ -300,6 +303,8 @@ body, * {
         display: flex;
         justify-content: center;
         margin-top: 150px;
+        background-color: #f5f5f5;;
+        padding: 10px;
     }
     .latestposts .latestpostcontent{
         width: 90%;
@@ -316,7 +321,7 @@ body, * {
 
     }
     .post img{
-        width: 30%;
+        width: 50%;
         margin-top: 20px;
         margin-left: 20px;
     }
@@ -559,6 +564,14 @@ body, * {
    
    
     }
+    .footer .upperfooter .upperfootercontent {
+        display: block;
+    }
+    .footer .upperfooter .upperfootercontent div:nth-child(4){
+        width: 100%;
+        margin-left: 0;
+    }
+}
     @media screen and (max-width:740px) {
         .latestnews .latesnewscontent .latestnewsdivs{
             display: block;
@@ -568,9 +581,11 @@ body, * {
             margin-left: 0;
             margin-top: 20px;
         }
+        .header .upperheader ul:nth-child(1) li:nth-child(3){
+            display: none;
+        } 
     }
     
-}
 @media screen and (max-width:600px) {
     .footer .upperfooter .upperfootercontent{
         width: 50%;
