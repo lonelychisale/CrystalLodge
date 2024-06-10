@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crystal Lodge - Home</title>
+    <link rel="icon" href="images/logo.jpeg" type="image/x-icon"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
    <link rel="stylesheet" href="style.css">
@@ -48,358 +49,166 @@
         observer.observe(aboutSection);
         observer.observe(accommodationSection);
     });
+
+
+    //contact form
+
+                    // Function to display the success message
+                    function displayMessage(type, message) {
+                const messageDiv = document.getElementById('message');
+                messageDiv.className = `message ${type}`;
+                messageDiv.textContent = message;
+                messageDiv.style.display = 'block';
+            
+                // Append the message div inside the form
+                const form = document.getElementById('contactForm');
+                form.appendChild(messageDiv);
+            }
+            
+            
+                    // Function to handle form submission
+                    function handleFormSubmit(event) {
+                event.preventDefault(); // Prevent default form submission
+            
+                const formData = new FormData(event.target); // Create FormData object from the form
+                fetch('contactmail.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        displayMessage('success', data.message);
+                    } else {
+                        displayMessage('error', data.message);
+                    }
+                })
+                .catch(error => {
+                    displayMessage('error', 'An error occurred. Please try again.');
+                    console.error('Error:', error);
+                });
+            }
+            
+            
+                    // Add event listener to the form
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const form = document.querySelector('form');
+                        form.addEventListener('submit', handleFormSubmit);
+                    });
+             
     </script>
-    <style>
-        body, * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-size: 17px;
-    font-family: sans-serif;
-    scroll-behavior: smooth;
-}
-
-.header {
-    background-color: red;
-    width: 100vw;
-    position: fixed;
-    height: 130px;
-    z-index: 1000;
-}
-
-.header .upperheader {
-    display: flex;
-    background-color: white;
-    padding: 5px 30px;
-}
-
-.header .upperheader ul {
-    display: flex;
-    align-items: center;
-    margin: 0;
-}
-
-.header .upperheader ul li {
-    list-style-type: none;
-    margin-left: 20px;
-    color: #1f3368;
-}
-
-.header .upperheader ul:first-child span {
-    margin-left: 3px;
-    color: #a87e37;
-}
-
-.header .upperheader ul:nth-child(2) {
-    margin-left: auto;
-}
-
-
-.header .lowerheader {
-    display: flex;
-    align-items: center;
-    padding: 5px 30px;
-    background-color: #1f3368;
-}
-
-.header .lowerheader .leftlowerheader img {
-    width: 90px;
-}
-
-.header .lowerheader .rightlowerheader {
-    margin-left: auto;
-}
-
-.close {
-    display: none;
-}
-
-.header .lowerheader .rightlowerheader ul {
-    display: flex;
-    align-items: center;
-    margin: 0;
-}
-
-.header .lowerheader .rightlowerheader ul li {
-    list-style-type: none;
-    margin-left: 30px;
-}
-
-.header .lowerheader .rightlowerheader ul li a {
-    color: white;
-    font-size: 16px;
-    font-family: sans-serif;
-    text-decoration: none;
-}
-
-.header .lowerheader .rightlowerheader ul li a:hover,
-.header .lowerheader .rightlowerheader ul li:first-child a {
-    color: #a87e37;
-}
-
-.header .lowerheader .rightlowerheader ul li:last-child {
-    background-color: #a87e37;
-    color: white;
-    padding: 10px 30px;
-    margin-left: 30px;
-}
-
-.header .lowerheader .rightlowerheader ul li:last-child:hover {
-    background-color: white;
-    color: #a87e37;
-}
-
-.header .lowerheader .rightlowerheader ul li:last-child a:hover {
-    color: #a87e37;
-}
-
-/* Entrance animation for header */
-.header-entrance {
-    animation: slideDown 1s ease-out;
-}
-
-/* Keyframes for entrance animation */
-@keyframes slideDown {
-    from {
-        transform: translateY(-100%);
+ <style>
+    body{
+        scroll-behavior: smooth;
     }
-    to {
-        transform: translateY(0);
+       .header .upperheader {
+        display: flex;
+        background-color: white;
+        padding: 5px 30px;
+      
+        padding-left: 0 !important;
     }
+    .header .upperheader ul:first-child{
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+   
 }
-
-/* Transition for hiding/showing header on scroll */
-.header-hidden {
-    transform: translateY(-100%);
-    transition: transform 0.3s ease-out;
-}
-
-.slider-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    height: 95vh;
-}
-
-.descslider {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
-
-.descslider.active {
-    opacity: 1;
-}
-
-.descslider .content {
-    width: 60%;
-    text-align: center;
-    color: white;
-    text-transform: uppercase;
-    margin-top: 120px;
-}
-
-.descslider .content button {
-    background-color: #a87e37;
-    border: none;
-    padding: 10px 30px;
-    text-transform: uppercase;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-.descslider.first {
-    background-image: url("images/9.jpeg");
-}
-
-.descslider.second {
-    background-image: url("images/WhatsApp\ Image\ 2024-05-31\ at\ 7.31.30\ PM\(2\).jpeg");
-}
-
-.descslider.third {
-    background-image: url("images/360_F_80911186_RoBCsyLrNTrG7Y1EOyCsaCJO5DyHgTox.jpg");
-}
-
-.descslider.forth {
-    background-image: url("images/10.jpeg");
-}
-
-.bookform {
-    display: flex;
-    justify-content: center;
-    padding: 50px 0;
-    background-color: #f5f5f5;
-}
-
-.bookform form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 60%;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.bookform .formgroup {
-    flex: 1;
-    min-width: 150px;
-    margin: 10px;
-}
-
-.bookform .formgroup label {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-.bookform .formgroup input,
-.bookform .formgroup select {
-    width: 100%;
-
-
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.bookform button {
-    background-color: #a87e37;
-    border: none;
-    padding: 10px 30px;
-    color: white;
-    text-transform: uppercase;
-    font-size: 18px;
-    cursor: pointer;
-    margin-top: 20px;
-    border-radius: 5px;
-}
-
-
-     .title {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .title button {
-            background: none;
-            border: none;
-            color: #1f3368;
-            cursor: pointer;
-        }
-        
-        .title button:hover i {
-            color: #a87e37;
-        }
-        
-        .accommodatiompricing {
+       .footer .upperfooter .upperfootercontent div:nth-child(4) div div input[type='submit']{
+       width: auto;
+        background-color: #a87e37;
+        color: white;
+        padding: 10px;
+       
+        text-transform: capitalize;
+        border: none;
+    }
+     @media screen and (max-width:1013px){
+        .upperheader ul:nth-child(1) li:nth-child(1){
             display: none;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
         }
-        
-        .accommodatiompricing.active {
-            display: block;
-            opacity: 1;
-        }
+     }
+     @media screen and (max-width:870px){
+        .header .upperheader ul:nth-child(2) 
+    {
+        display: flex;
 
-        .category {
-            text-align: left;
-            text-transform: capitalize;
-            background-color: whitesmoke;
-            padding: 10px;
-            margin-bottom: 20px;
-        }
-
-        .category img {
-            width: 100%;
-            height: auto;
+    }
+   
+}
+@media screen and (max-width:740px) {
+        .latestnews .latesnewscontent .latestnewsdivs{
             display: block;
         }
-
-        .category div {
-            background-color: #1f3268b7;
-            color: white;
+        .latestnews .latesnewscontent .latestnewsdivs .latest{
             width: 100%;
-            padding: 10px;
             margin-left: 0;
+            margin-top: 20px;
         }
-
-        .category ul {
-            padding: 10px;
-        }
-
-        .category h4 {
-            background-color: #a87e37;
-            padding: 5px;
-        }
-
-        @keyframes rotateVisibility {
-            0%, 49% { opacity: 1; }
-            50%, 100% { opacity: 0; }
-        }
-
-        .accommodatiompricing.one {
-            animation: rotateVisibility 10s infinite;
-        }
-
-        .accommodatiompricing.two {
-            animation: rotateVisibility 10s infinite;
-            animation-delay: 5s;
-        }
+        .footer .upperfooter .upperfootercontent div:nth-child(2){
+        width: 100%;
+        margin-left: 0;
+     
+    }
+    .footer .upperfooter .upperfootercontent div:nth-child(3){
+        width: 100%;
+        margin-left: 0;
+     
+    }
+    .footer .upperfooter .upperfootercontent div:nth-child(4){
+        width: 100%;
+        margin-left: 0;
+     
+    }
        
-        .aboutheader {
-            margin-bottom: 20px;
+    }
+  
+   
+    @media screen and (max-width:770px) {
+        .header .upperheader ul:nth-child(1) li:nth-child(3){
+          display: none;
         }
-
         
-        .latestpostcontent {
-            text-align: center;
+    }
+   
+   
+    @media screen and (max-width:345px) {
+        .header .upperheader ul:nth-child(1) li:nth-child(2){
+          display: none;
         }
-
-        .postheader h1 {
-            font-size: 2em;
-            margin-bottom: 10px;
+    }
+    @media screen and (max-width:770px) {
+        .header .upperheader ul:nth-child(1) li:nth-child(3){
+          display: none;
         }
-
-        .postheader p {
-            margin-bottom: 20px;
+        
+    }
+   
+  
+    @media screen and (max-width:360px) {
+        .header .upperheader ul:nth-child(1) li:nth-child(2){
+          display:none ;
         }
+        .upperheader {
+            position: relative;
+           
+            display: none !important;
 
-       
-        .viewall button {
-            background-color: #a87e37;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: background-color 0.01s ease;
         }
-
-        .viewall button:hover {
-            background-color: #1f3368;
+        .header{
+            height: 100px !important;
+            background-color: unset;
         }
-
-    </style>
+    }
+ </style>
 </head>
 <body>
     <div class="hotel">
         <div class="header">
             <div class="upperheader">
                 <ul>
-                    <li><span class="glyphicon glyphicon-map-marker"></span> Kalimbuka Area Behind Mental Hospital, Zomba</li>
-                    <li><span class="glyphicon glyphicon-earphone"></span> +265 985 551 348 </li>
-                    <li><span class="glyphicon glyphicon-envelope"></span> info@crystalsloge.com</li>
+                    <li><span><i class="bi bi-geo-alt-fill"></i></span> Kalimbuka Area Behind Mental Hospital, Zomba</li>
+                    <li><span><i class="bi bi-telephone"></i></span> +265 985 551 348 </li>
+                    <li><span ><i class="bi bi-envelope"></i></span> Crystalslodge@outlook.com</li>
                 </ul>
                 <ul>
                     <li><i class="bi bi-whatsapp"></i></li>
@@ -481,38 +290,19 @@
                     <button>order your meal</button>
                 </div>
             </div>
+
+            <div class="descslider fiveth">
+                <div class="content">
+                    <h1>Crystal's Lodge Bar</h1>
+                    <h2>Best Alcohol with our best service is our ultimate goal</h2>
+                    <p>Enjoy our unique, expertly crafted cocktails made by our talented bartenders, featuring both classic favorites and innovative new creations.</p>
+                    <button>order your meal</button>
+                </div>
+            </div>
         </div>
 
         <div class="bookform" >
-            <form action="">
-                <div class="formgroup">
-                    <label for="location">Location</label>
-                    <input type="text" id="location">
-                </div>
-                <div class="formgroup">
-                    <label for="checkin">Check-in</label>
-                    <input type="date" id="checkin">
-                </div>
-                <div class="formgroup">
-                    <label for="checkout">Check-out</label>
-                    <input type="date" id="checkout">
-                </div>
-                <div class="formgroup">
-                    <label for="room">Room</label>
-                    <select id="room">
-                        <option value="">1 Person Room</option>
-                    </select>
-                </div>
-                <div class="formgroup">
-                    <label for="roomtype">Room Type</label>
-                    <select id="roomtype">
-                        <option value="">Executive</option>
-                    </select>
-                </div>
-                <div class="formgroup">
-                    <input type="submit" value="check availability">
-                </div>
-            </form>
+            <h1 style="text-transform: uppercase;display: none;">cristals lodge,your best stay</h1>
         </div>
 
         <div class="accomodation">
@@ -534,7 +324,7 @@
                 <div class="accommodatiompricing one active" style="position: absolute;">
                     <div class="category one" style="text-align: left;text-transform: capitalize;background-color: whitesmoke;padding: 10px;">
                         <img src="images/2.jpeg" alt="sstandard">
-                        <div style="background-color: #1f3268b7;color: white;width: 100%;margin-left: 0;padding: 10px;">
+                        <div style="background-color: #1f3268b7;color: white;width: 100%;margin-left: 0;padding: 10px;height: 55vh;">
                             <ul style="padding: 10px;">
                                 <li> Queen size bed</li>
                                 <li>Jacuzzi</li>
@@ -546,7 +336,7 @@
                                 <li> Hair dryer</li> 
                                 <li>It has a lounge</li>
                             </ul>
-                            <h4 style="background-color: #a87e37;padding: 5px;">executive - mw900000 <span style="color: #1f3268b7;">. 1 guest</span></h4>
+                            <h4 style="background-color: #a87e37;padding: 5px;">executive - mwK90,000 <span style="color: #1f3268b7;">. 1 guest</span></h4>
                            
                             <h3>single room</h3>
 
@@ -556,7 +346,7 @@
                     </div>
                     <div class="category two" style="text-align: left;text-transform: capitalize;background-color: whitesmoke;padding: 20px;">
                         <img src="images/3.jpeg" alt="executive">
-                        <div style="background-color: #1f3268b7;color: white;width: 100%;margin-left: 0;padding: 10px;">
+                        <div style="background-color: #1f3268b7;color: white;width: 100%;margin-left: 0;padding: 10px;height: 55vh;">
                             <ul style="padding: 10px;">
                                 <li> Bathtub</li>
                                 <li>Queen size bed</li>
@@ -565,9 +355,11 @@
                                 <li>Unique tv stand with a
                                     fridge inside</li> 
                                 <li> Hair dryer</li> 
-                                <li>It has a lounge</li>
+                                <li></li>
+                                <li></li>
+                                
                             </ul>
-                            <h4  style="background-color: #a87e37;padding: 5px;">premium - mw600000 <span style="color: #1f3268b7;">. 1 guest</span></h4>
+                            <h4  style="background-color: #a87e37;padding: 5px;">premium - mwK60,000 <span style="color: #1f3268b7;">. 1 guest</span></h4>
                             <h3>single room</h3>
 
                         </div>
@@ -576,7 +368,7 @@
                     </div>
                     <div class="category three" style="text-align: left;text-transform: capitalize;background-color: whitesmoke;padding: 20px;">
                         <img src="images/4.jpeg" alt="premium">
-                        <div style="background-color: #1f3268b7;color: white;width: 100%;margin-left: 0;padding: 10px;">
+                        <div style="background-color: #1f3268b7;color: white;width: 100%;margin-left: 0;padding: 10px;height: 55vh;">
                             <ul style="padding: 10px;">
                                 <li> Queen size bed</li>
                                 <li>Dstv</li>
@@ -584,9 +376,10 @@
                                 <li>Wifi</li> 
                                 <li>Min fridge</li> 
                                 <li> Hair dryer</li> 
+                                <li></li>
                                 
                             </ul>
-                            <h4 style="background-color: #a87e37;padding: 5px;">standard - mw500000 <span style="color: #1f3268b7;">. 1 guest</span></h4>
+                            <h4 style="background-color: #a87e37;padding: 5px;">standard - mwK50,000 <span style="color: #1f3268b7;">. 1 guest</span></h4>
                             
                             <h3>single room</h3>
 
@@ -598,7 +391,7 @@
                 <div class="accommodatiompricing two" >
                     <div class="category one" style="text-align: left;text-transform: capitalize;background-color: whitesmoke;padding: 10px;">
                         <img src="images/2.jpeg" alt="sstandard">
-                        <div style="background-color: #1f3268b7;color: white;width: 100%;margin-left: 0;padding: 10px;">
+                        <div style="height: 55vh;background-color: #1f3268b7;color: white;width: 100%;margin-left: 0;padding: 10px;">
                             <ul style="padding: 10px;">
                                 <li> Queen size bed</li>
                                 <li>Jacuzzi</li>
@@ -612,7 +405,7 @@
                             </ul>
                             
                            
-                            <h4 style="background-color: #a87e37;padding: 5px;">executive - mw900000 <span style="color: #1f3268b7;">. 2 guest</span></h4>
+                            <h4 style="background-color: #a87e37;padding: 5px;">executive - mwK90,000 <span style="color: #1f3268b7;">. 2 guest</span></h4>
                             <h3>double room</h3>
 
                         </div>
@@ -621,7 +414,7 @@
                     </div>
                     <div class="category two" style="text-align: left;text-transform: capitalize;background-color: whitesmoke;padding: 20px;">
                         <img src="images/3.jpeg" alt="executive">
-                        <div style="background-color: #1f3268b7;color: white;width: 100%;margin-left: 0;padding: 10px;">
+                        <div style="height: 55vh;background-color: #1f3268b7;color: white;width: 100%;margin-left: 0;padding: 10px;">
                             <ul style="padding: 10px;">
                                 <li> Bathtub</li>
                                 <li>Queen size bed</li>
@@ -631,9 +424,10 @@
                                     fridge inside</li> 
                                 <li> Hair dryer</li> 
                                 <li>It has a lounge</li>
+                                
                             </ul>
                            
-                            <h4 style="background-color: #a87e37;padding: 5px;">premium - mw800000 <span style="color: #1f3268b7;">. 2 guest</span></h4>
+                            <h4 style="background-color: #a87e37;padding: 5px;">premium - mwK80,000 <span style="color: #1f3268b7;">. 2 guest</span></h4>
                         <h3>double room</h3>
 
                         </div>
@@ -642,7 +436,7 @@
                     </div>
                     <div class="category three" style="text-align: left;text-transform: capitalize;background-color: whitesmoke;padding: 20px;">
                         <img src="images/4.jpeg" alt="premium">
-                        <div style="background-color: #1f3268b7;color: white;width: 100%;margin-left: 0;padding: 10px;">
+                        <div style="height: 55vh;background-color: #1f3268b7;color: white;width: 100%;margin-left: 0;padding: 10px;">
                             <ul style="padding: 10px;">
                                 <li> Queen size bed</li>
                                 <li>Dstv</li>
@@ -650,11 +444,12 @@
                                 <li>Wifi</li> 
                                 <li>Min fridge</li> 
                                 <li> Hair dryer</li> 
+                                <li></li>
                                 
                             </ul>
                             
                             
-                            <h4 style="background-color: #a87e37;padding: 5px;">standard - mw700000 <span style="color: #1f3268b7;">. 2 guest</span></h4>
+                            <h4 style="background-color: #a87e37;padding: 5px;">standard - mwK70,000 <span style="color: #1f3268b7;">. 2 guest</span></h4>
                             <h3>double room</h3>
 
                         </div>
@@ -701,7 +496,9 @@
 
                 </div>
                     
-                
+                <div class="viewall" style="text-align: center;">
+                    <button><a href="Pages/services.html" style="color: white;text-decoration: none;">learn more</a></button>
+                </div>
                 
             </div>
         </div>
@@ -732,7 +529,7 @@
             <div class="latestpostcontent">
                 <div class="postheader">
                     <h1>our gallary</h1>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae laborum doloremque suscipit aliquid magni illum delectus, sint incidunt pariatur temporibus eligendi odit nobis quod autem corporis velit harum consequuntur nam?</p>
+                    <p>Welcome to our gallery, where moments come to life and memories are immortalized in pixels. Step into a world of visual splendor as we showcase the beauty and charm of Crystals Lodge and its surroundings</p>
                 </div>
                 <div class="posts" id="posts">
                     <div class="post one">
@@ -746,7 +543,7 @@
                         <img src="images/9.jpeg" alt="">
                     </div>
                     <div class="post three">
-                        <img src="images/10.jpeg" alt="">
+                        <img src="images/22.jpeg" alt="">
                         <img src="images/11.jpeg" alt="">
                         <img src="images/12.jpeg" alt="">
                     </div>
@@ -812,9 +609,9 @@
                     <h1>contact info</h1>
                     <ul>
                         
-                        <li><span class="glyphicon glyphicon-map-marker"></span> Kalimbuka Area Behind Mental Hospital, Zomba</li>
-                        <li><span class="glyphicon glyphicon-earphone"></span> +265 985 551 348 </li>
-                        <li><span class="glyphicon glyphicon-envelope"></span> info@crystalsloge.com</li>
+                        <li><span><i class="bi bi-geo-alt-fill"></i></span> Kalimbuka Area Behind Mental Hospital, Zomba</li>
+                    <li><span><i class="bi bi-telephone"></i></span> +265 985 551 348 </li>
+                    <li><span ><i class="bi bi-envelope"></i></span> Crystalslodge@outlook.com</li>
                     </ul>
                 </div>
                 <div class="footerservices">
@@ -832,35 +629,36 @@
                         <li><a href="Pages/services.html">Services</a></li>
                         <li><a href="Pages/gallary.html">Gallery</a></li>
                         <li><a href="#contact">Contact</a></li>
-                        <li><a href="Pages/posts.html">posts</a></li>
-                        <li><a href="Pages/conference.html">confence</a></li>
-                        <li><a href="Pages/restaurant.html">restaurant</a></li>
+                        
                         
                     </ul>
                 </div>
-
+                
                 <div class="contactform">
                     <div class="contactformcontent">
-                        <form action="">
+                         <div id="message" class="message" style="display: none;background-color: rgb(122, 202, 122);color: white;margin-top: 10px;padding: 5px;"></div> 
+                        <form method="post" id="contactForm" >
                             <div>
                                 <div class="formgroup">
-                                    <label for="">email adress</label>
-                                    <input type="email" name="email" id="">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" name="email" id="email" required style="color: grey;padding: 5px;">
                                 </div>
-                                <div class="formgrou">
-                                    <label for="">subject</label>
-                                    <input type="text" name="" id="">
+                                <div class="formgroup">
+                                    <label for="subject">Subject</label>
+                                    <input type="text" name="subject" id="subject" required style="color: grey;padding: 5px;">
                                 </div>
                             </div>
                             <div>
-                                <div class="formgrou">
-                                    <textarea name="" id=""></textarea>
+                                <div class="formgroup">
+                                    <label for="message">Message</label>
+                                    <textarea  name="message" id="message" required style="color: grey;padding: 5px;"></textarea >
                                 </div>
-                                <div class="formgrou">
-                                    <input type="submit" value="send message">
+                                <div class="formgroup">
+                                    <input type="submit" value="Send Message">
                                 </div>
                             </div>
                         </form>
+                        
                     </div>
                 </div>
                </div>
@@ -868,7 +666,7 @@
 
             <div class="lowerfooter">
                 <div class="lowerfootercontent">
-                    <ul><li>© 2024 Londesigns. All rights reserved </li></ul>
+                    <ul><li>©copyright 2024. Crystals Lodge</li></ul>
                     <div> 
                             <ul>
                                 <li><i class="bi bi-whatsapp"></i></li>
@@ -878,7 +676,7 @@
                             </ul>
                         
                     </div>
-                    <ul><li>privacy reserved</li></ul>
+                 
                 </div>
 
             </div>
@@ -979,8 +777,9 @@ const firstButton = document.getElementById("firstroomdisplay");
                 "images/7.jpeg",
                 "images/8.jpeg",
                 "images/9.jpeg",
-                "images/10.jpeg",
+                "images/22.jpeg",
                 "images/11.jpeg",
+                "images/20.jpeg",
             ];
 
             const posts = document.querySelectorAll('.posts .post img');

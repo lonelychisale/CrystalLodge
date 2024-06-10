@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/logo.jpeg" type="image/x-icon"/>
     <title>Crystal Lodge - Services</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -48,6 +49,51 @@
         observer.observe(aboutSection);
         observer.observe(accommodationSection);
     });
+
+      //contact form
+
+                    // Function to display the success message
+                    function displayMessage(type, message) {
+                const messageDiv = document.getElementById('message');
+                messageDiv.className = `message ${type}`;
+                messageDiv.textContent = message;
+                messageDiv.style.display = 'block';
+            
+                // Append the message div inside the form
+                const form = document.getElementById('contactForm');
+                form.appendChild(messageDiv);
+            }
+            
+            
+                    // Function to handle form submission
+                    function handleFormSubmit(event) {
+                event.preventDefault(); // Prevent default form submission
+            
+                const formData = new FormData(event.target); // Create FormData object from the form
+                fetch('../contactmail.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        displayMessage('success', data.message);
+                    } else {
+                        displayMessage('error', data.message);
+                    }
+                })
+                .catch(error => {
+                    displayMessage('error', 'An error occurred. Please try again.');
+                    console.error('Error:', error);
+                });
+            }
+            
+            
+                    // Add event listener to the form
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const form = document.querySelector('form');
+                        form.addEventListener('submit', handleFormSubmit);
+                    });
     </script>
     <style>
         body, * {
@@ -60,7 +106,7 @@
 }
 
 .header {
-    background-color: red;
+ 
     width: 100vw;
     position: fixed;
     height: 130px;
@@ -78,7 +124,18 @@
     align-items: center;
     margin: 0;
 }
-
+.header .upperheader {
+        display: flex;
+        background-color: white;
+        padding: 5px 30px;
+      
+        padding-left: 0 !important;
+    }
+    .header .upperheader ul:first-child{
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+   
+}
 .header .upperheader ul li {
     list-style-type: none;
     margin-left: 20px;
@@ -297,6 +354,99 @@
     border-radius: 5px;
 }
 
+       .footer .upperfooter .upperfootercontent div:nth-child(4) div div input[type='submit']{
+       width: auto;
+        background-color: #a87e37;
+        color: white;
+        padding: 10px;
+       
+        text-transform: capitalize;
+        border: none;
+    }
+     @media screen and (max-width:1013px){
+        .upperheader ul:nth-child(1) li:nth-child(1){
+            display: none;
+        }
+     }
+     @media screen and (max-width:870px){
+        .header .upperheader ul:nth-child(2) 
+    {
+        display: flex;
+
+    }
+   
+}
+@media screen and (max-width:740px) {
+        .latestnews .latesnewscontent .latestnewsdivs{
+            display: block;
+        }
+        .latestnews .latesnewscontent .latestnewsdivs .latest{
+            width: 100%;
+            margin-left: 0;
+            margin-top: 20px;
+        }
+        .footer .upperfooter .upperfootercontent div:nth-child(2){
+        width: 100%;
+        margin-left: 0;
+     
+    }
+    .footer .upperfooter .upperfootercontent div:nth-child(3){
+        width: 100%;
+        margin-left: 0;
+     
+    }
+    .footer .upperfooter .upperfootercontent div:nth-child(4){
+        width: 100%;
+        margin-left: 0;
+     
+    }
+       
+    }
+  
+    @media screen and (max-width:600px) {
+        .footer .upperfooter .upperfootercontent{
+           width: 100%;
+           padding: 20PX;
+        }
+        
+    }
+
+    @media screen and (max-width:770px) {
+        .header .upperheader ul:nth-child(1) li:nth-child(3){
+          display: none;
+        }
+        
+    }
+   
+   
+    @media screen and (max-width:345px) {
+        .header .upperheader ul:nth-child(1) li:nth-child(2){
+          display: none;
+        }
+    }
+    @media screen and (max-width:770px) {
+        .header .upperheader ul:nth-child(1) li:nth-child(3){
+          display: none;
+        }
+        
+    }
+   
+  
+    @media screen and (max-width:360px) {
+        .header .upperheader ul:nth-child(1) li:nth-child(2){
+          display:none ;
+        }
+        .upperheader {
+            position: relative;
+           
+            display: none !important;
+
+        }
+        .header{
+            height: 100px !important;
+            background-color: unset;
+        }
+    }
 
     </style>
 </head>
@@ -305,9 +455,9 @@
         <div class="header">
             <div class="upperheader">
                 <ul>
-                    <li><span class="glyphicon glyphicon-map-marker"></span> Kalimbuka Area Behind Mental Hospital, Zomba</li>
-                    <li><span class="glyphicon glyphicon-earphone"></span> +265 985 551 348 </li>
-                    <li><span class="glyphicon glyphicon-envelope"></span> info@crystalsloge.com</li>
+                    <li><span><i class="bi bi-geo-alt-fill"></i></span> Kalimbuka Area Behind Mental Hospital, Zomba</li>
+                    <li><span><i class="bi bi-telephone"></i></span> +265 985 551 348 </li>
+                    <li><span ><i class="bi bi-envelope"></i></span> Crystalslodge@outlook.com</li>
                 </ul>
                 <ul>
                     <li><i class="bi bi-whatsapp"></i></li>
@@ -343,26 +493,26 @@
         </div>
 
         <div class="slider-container">
-            <div class="descslider first active" style="background-image: url('../images/10.jpeg');height: 80vh;">
+            <div class="descslider first active" style="background-image: url('../images/1.jpeg');height: 80vh;">
                 <div class="content">
                     <h1>Home - Our Services</h1>
                     
                 </div>
             </div>
-            <div class="descslider second" style="background-image: url('../images/11.jpeg');height: 80vh;">
+            <div class="descslider second" style="background-image: url('../images/2.jpeg');height: 80vh;">
                 <div class="content">
                     <h1>Home - Our Services</h1>
                     
                 </div>
             </div>
-            <div class="descslider third" style="background-image: url('../images/8.jpeg');height: 80vh;">
+            <div class="descslider third" style="background-image: url('../images/11.jpeg');height: 80vh;">
                 <div class="content">
                     <h1>Home - Our Services</h1>
                     
                 </div>
             </div>
 
-            <div class="descslider forth" style="background-image: url('../images/7.jpeg');height: 80vh;">
+            <div class="descslider forth" style="background-image: url('../images/16.jpeg');height: 80vh;">
                 <div class="content">
                     <h1>Home - Our Services</h1>
                     
@@ -410,6 +560,18 @@
                 width: 100%;
             }
         }
+        /* Add this CSS for small screens */
+        @media screen and (max-width:740px){
+        .navbar 
+    {
+        display: block;
+
+    }
+    .rightlowerheader{
+        display: none;
+    }
+}
+
     </style>
         <div class="service" id="services">
          <div class="servicescontent">
@@ -447,7 +609,19 @@
                     <p></p>
                 </div>
                 <div class="right">
-                    <img src="../images/10.jpeg" alt="">
+                    <img src="../images/22.jpeg" alt="">
+                </div>
+            </div>
+
+            <div class="serviceoffer accomodation">
+                <div class="left">
+                    <h1>Bar</h1>
+                    <p>Crystal's Lodge Bar offers a perfect place to unwind and enjoy a selection of fine beverages. Whether you're looking to relax after a long day or to socialize with friends, our bar offers a welcoming and vibrant atmosphere</p>
+                    <p>Our bar features an extensive menu of alcoholic and non-alcoholic drinks, including fine wines, premium spirits, craft beers, and creative cocktails</p>
+                    <p>Enjoy our unique, expertly crafted cocktails made by our talented bartenders, featuring both classic favorites and innovative new creations</p>
+                </div>
+                <div class="right">
+                    <img src="../images/21.jpeg" alt="">
                 </div>
             </div>
         </div>
@@ -462,9 +636,9 @@
                     <h1>contact info</h1>
                     <ul>
                         
-                        <li><span class="glyphicon glyphicon-map-marker"></span> Kalimbuka Area Behind Mental Hospital, Zomba</li>
-                        <li><span class="glyphicon glyphicon-earphone"></span> +265 985 551 348 </li>
-                        <li><span class="glyphicon glyphicon-envelope"></span> info@crystalsloge.com</li>
+                        <li><span><i class="bi bi-geo-alt-fill"></i></span> Kalimbuka Area Behind Mental Hospital, Zomba</li>
+                        <li><span><i class="bi bi-telephone"></i></span> +265 985 551 348 </li>
+                        <li><span ><i class="bi bi-envelope"></i></span> Crystalslodge@outlook.com</li>
                     </ul>
                 </div>
                 <div class="footerservices">
@@ -488,26 +662,29 @@
 
                 <div class="contactform">
                     <div class="contactformcontent">
-                        <form action="">
+                         <div id="message" class="message" style="display: none;background-color: rgb(122, 202, 122);color: white;margin-top: 10px;padding: 5px;"></div> 
+                        <form method="post" id="contactForm" >
                             <div>
                                 <div class="formgroup">
-                                    <label for="">email adress</label>
-                                    <input type="email" name="email" id="">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" name="email" id="email" required style="color: grey;padding: 5px;">
                                 </div>
-                                <div class="formgrou">
-                                    <label for="">subject</label>
-                                    <input type="text" name="" id="">
+                                <div class="formgroup">
+                                    <label for="subject">Subject</label>
+                                    <input type="text" name="subject" id="subject" required style="color: grey;padding: 5px;">
                                 </div>
                             </div>
                             <div>
-                                <div class="formgrou">
-                                    <textarea name="" id=""></textarea>
+                                <div class="formgroup">
+                                    <label for="message">Message</label>
+                                    <textarea  name="message" id="message" required style="color: grey;padding: 5px;"></textarea >
                                 </div>
-                                <div class="formgrou">
-                                    <input type="submit" value="send message">
+                                <div class="formgroup">
+                                    <input type="submit" value="Send Message">
                                 </div>
                             </div>
                         </form>
+                        
                     </div>
                 </div>
                </div>
@@ -515,7 +692,7 @@
 
             <div class="lowerfooter">
                 <div class="lowerfootercontent">
-                    <ul><li>© 2024 Resort. All rights reserved </li></ul>
+                    <ul><li>©copyright 2024. Crystals Lodge</li></ul>
                     <div> 
                             <ul>
                                 <li><i class="bi bi-whatsapp"></i></li>
@@ -525,7 +702,7 @@
                             </ul>
                         
                     </div>
-                    <ul><li>privacy reserved</li></ul>
+                 
                 </div>
 
             </div>
